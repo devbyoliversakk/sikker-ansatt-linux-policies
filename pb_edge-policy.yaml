@@ -1,6 +1,8 @@
 ---
 - name: Configure Microsoft Edge policies
   hosts: localhost
+  vars_files:
+    - settings.yaml
 
   tasks:
     - name: Create Edge policy directories
@@ -21,6 +23,7 @@
         owner: root
         group: root
         mode: '0644'
+      loop: "{{ edge_managed_policies }}"
 
     - name: Create recommended Edge policy file
       ansible.builtin.template:
@@ -29,3 +32,4 @@
         owner: root
         group: root
         mode: '0644'
+      loop: "{{ edge_recommended_policies }}"

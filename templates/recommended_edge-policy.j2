@@ -1,5 +1,7 @@
 {
     // Managed by Intune
 
-    "HubsSidebarEnabled": false,
+"{% for policy in edge_recommended_policies %}
+    "{{ policy.key }}": {{ policy.value }}{% if not loop.last %},{% endif %}
+{% endfor %}
 }

@@ -1,0 +1,20 @@
+---
+
+# MSEdge configuration
+edge_managed_policies:
+  - key: BrowserSignin
+    value: 1
+  - key: ForceSync
+    value: true
+  - key: NonRemovableProfileEnabled
+    value: true
+  - key: PasswordManagerEnabled
+    value: false
+  - key: RestrictSigninToPattern
+    value: "*@upheads.no"
+  - key: ManagedAccountsSigninRestriction
+    value: "primary_account_strict"
+
+edge_recommended_policies:
+  - key: HubsSidebarEnabled
+    value: false

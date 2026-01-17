@@ -1,10 +1,7 @@
 {
     // Managed by Intune
 
-    "BrowserSignin": 1,
-    "ForceSync": true,
-    "NonRemovableProfileEnabled": true,
-    "PasswordManagerEnabled": false,
-    "RestrictSigninToPattern": "*@upheads.no",
-    "ManagedAccountsSigninRestriction": "primary_account_strict",
+"{% for policy in edge_managed_policies %}
+    "{{ policy.key }}": {{ policy.value }}{% if not loop.last %},{% endif %}
+{% endfor %}
 }
