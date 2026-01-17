@@ -3,9 +3,6 @@ mde_installer_log: "/var/log/sa-mde-installer.log"
 onboarding_url: "https://upheads.sharepoint.com/:u:/r/Dokumenter/Interndrift/Linux/defender/upheads-onboarding.py?csf=1&web=1&e=kb50Nt"
 mde_installer_url: "https://raw.githubusercontent.com/microsoft/mdatp-xplat/refs/heads/master/linux/installation/mde_installer.sh"
 
-
-
-
 # MSEdge configuration
 edge_managed_policies:
   - key: BrowserSignin
