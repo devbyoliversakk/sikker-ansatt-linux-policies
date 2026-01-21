@@ -5,6 +5,13 @@
     - settings.yaml
 
   tasks:
+    - ansible.builtin.include_vars:
+        file: "{{ playbook_dir }}/../customer-settings.yaml"
+
+    - name: Merge default and customer managed Edge policies
+      ansible.builtin.set_fact:
+        edge_managed_policies: "{{ edge_managed_policies + edge_managed_policies_customer | default([]) }}"
+
     - name: Create Edge policy directories
       ansible.builtin.file:
         path: "{{ item }}"
