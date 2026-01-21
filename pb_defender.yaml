@@ -29,4 +29,4 @@
 
     - name: Install MDE on host
       ansible.builtin.script:
-        cmd: "/tmp/mde_install/mde_installer.sh --install --channel prod --onboard /tmp/mde_install/mdatp_onboard.json --verbose --log-path {{ mde_installer_log }}"
+        cmd: "/tmp/mde_install/mde_installer.sh --install --channel prod --onboard /tmp/mde_install/mdatp_onboard.json --rtp-mode --verbose --log-path {{ mde_installer_log }}"
