@@ -1,0 +1,6 @@
+---
+mde_onboarding_url: test
+
+edge_managed_policies_customer:
+  - key: RestrictSigninToPattern
+    value: "*@domain.com"
