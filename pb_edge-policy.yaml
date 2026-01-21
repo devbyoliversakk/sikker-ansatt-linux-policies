@@ -5,7 +5,8 @@
     - settings.yaml
 
   tasks:
-    - ansible.builtin.include_vars:
+    - name: Include customer spesific variables
+      ansible.builtin.include_vars:
         file: "{{ playbook_dir }}/../customer-settings.yaml"
 
     - name: Merge default and customer managed Edge policies
