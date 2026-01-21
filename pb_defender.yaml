@@ -17,9 +17,16 @@
 
     - name: Download Onboarding script
       ansible.builtin.get_url:
+        url: "{{ mde_installer_url }}"
+        dest: /tmp/mde_install/mde_installer.sh
+        mode: '0500'
+
+    - name: Download Onboarding json
+      ansible.builtin.get_url:
         url: "{{ mde_onboarding_url }}"
         dest: /tmp/mde_install/mdatp_onboard.json
-        mode: '0700'
+        mode: '0600'
 
     - name: Install MDE on host
-      ansible.builtin.script: "{{ mde_installer_url }} --install --onboard /tmp/mde_install/mdatp_onboard.json --verbose --log-path {{ mde_installer_log }}"
+      ansible.builtin.script:
+        cmd: "/tmp/mde_install/mde_installer.sh --install --channel prod --onboard /tmp/mde_install/mdatp_onboard.json --verbose --log-path {{ mde_installer_log }}"
