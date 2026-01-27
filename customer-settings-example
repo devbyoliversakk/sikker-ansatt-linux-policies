@@ -1,5 +1,5 @@
 ---
-mde_onboarding_url: test
+mde_onboarding_url: https://blobstorage.blob.core.windows.net/some-location/mdatp_onboard.json
 
 edge_managed_policies_customer:
   - key: RestrictSigninToPattern
