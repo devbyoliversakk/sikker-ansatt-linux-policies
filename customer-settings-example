@@ -1,4 +1,0 @@
----
-mde_onboarding_url: https://blobstorage.blob.core.windows.net/some-location/mdatp_onboard.json
-tenant_domain: example.no # The tenant domain should be set to the domain part of the UPN of the users in the tenant
-local_admin_groups: 11b794e0-b07c-4c80-a11c-ed9b825a48fe,46a87237-1e94-4011-864f-a2ef425d8f3c # Set to object id of Entra ID groups as a comma seperated list
