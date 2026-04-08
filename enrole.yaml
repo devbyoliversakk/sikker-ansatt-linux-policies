@@ -11,7 +11,7 @@
 
     - name: Install himmelblau agent
       ansible.builtin.import_tasks:
-        file: install-himmelblau.yaml
+        file: tasks/install-himmelblau.yaml
 
     - name: Ensure /etc/himmelblau exists
       ansible.builtin.file:
