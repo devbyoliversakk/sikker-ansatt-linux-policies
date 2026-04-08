@@ -1,0 +1,30 @@
+---
+- name: Enrole host using himmelblau
+  hosts: localhost
+  vars_files:
+    - settings.yaml
+
+  tasks:
+    - name: Include customer spesific variables
+      ansible.builtin.include_vars:
+        file: "{{ playbook_dir }}/../customer-settings.yaml"
+
+    - name: Install himmelblau agent
+      ansible.builtin.import_tasks:
+        file: install-himmelblau.yaml
+
+    - name: Ensure /etc/himmelblau exists
+      ansible.builtin.file:
+        path: /etc/himmelblau
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Create /etc/himmelblau/himmelblau.conf from template
+      ansible.builtin.template:
+        src: himmelblau.conf.j2
+        dest: /etc/himmelblau/himmelblau.conf
+        owner: root
+        group: root
+        mode: "0644"

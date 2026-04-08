@@ -1,0 +1,21 @@
+[global]
+domain = {{ tenant_domain }}
+hsm_type = tpm
+
+# Enable enroling to intune
+join_type = join
+apply_policy = true
+
+# Enable Linux Hello
+# Hello PIN is the same as the local user password.
+# This password will be used for sudo and login
+enable_hello = true
+
+# Sudoers
+sudo_groups = {{ sudo_groups | default() }}
+
+# Reqired for debian based systems
+local_groups = users
+home_attr = CN
+home_alias = CN
+use_etc_skel = true

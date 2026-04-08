@@ -1,0 +1,40 @@
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Install dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gpg
+
+- name: Add Himmelblau repo using key from URL
+  ansible.builtin.deb822_repository:
+    name: himmelblau
+    types: deb
+    uris: "https://packages.himmelblau-idm.org/stable/latest/deb/ubuntu24.04/"
+    suites: "./"
+    signed_by: https://packages.himmelblau-idm.org/himmelblau.asc
+    state: present
+    enabled: true
+    architectures: amd64
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Install himmelblau
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - himmelblau
+    - pam-himmelblau
+    - nss-himmelblau
+    - himmelblau-qr-greeter
+    - himmelblau-sso
+    - o365
