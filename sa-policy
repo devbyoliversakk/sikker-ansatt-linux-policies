@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
+policyDir="/usr/local/src/sikker-ansatt/policies"
 policyFile="${1%.*}"
-
-# Enable logging to file
 policyLogFile="/var/log/sa-policy-${policyFile}.log"
+
 exec >> "${policyLogFile}" 2>&1
 
 echo "Running Intune policy: ${policyFile} at $(date -Iseconds)" >> "${policyLogFile}"
@@ -15,8 +15,6 @@ else
  exit 250
 fi
 
-pushd /usr/local/src/sikker-ansatt/policies || exit 251
-ansible-playbook "${policyFile}.yaml" >> "${policyLogFile}"
-popd || return
+ansible-playbook "${policyDir}/${policyFile}.yaml" >> "${policyLogFile}"
 
 echo "Finished Intune policy: ${policyFile} at $(date -Iseconds)" >> "${policyLogFile}"
