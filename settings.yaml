@@ -14,6 +14,8 @@ edge_managed_policies:
     value: false
   - key: ManagedAccountsSigninRestriction
     value: "primary_account_strict"
+  - key: RestrictSigninToPattern
+    value: "*@{{ tenant_domain }}"
 
 edge_recommended_policies:
   - key: HubsSidebarEnabled
