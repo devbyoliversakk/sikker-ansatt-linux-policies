@@ -1,0 +1,22 @@
+#!/bin/bash
+
+policyFile="${1%.*}"
+
+# Enable logging to file
+policyLogFile="/var/log/sa-policy-${policyFile}.log"
+exec >> "${policyLogFile}" 2>&1
+
+echo "Running Intune policy: ${policyFile} at $(date -Iseconds)" >> "${policyLogFile}"
+
+if [ -f /usr/local/src/sikker-ansatt/venv/bin/activate ]; then
+ . /usr/local/src/sikker-ansatt/venv/bin/activate
+else
+ echo "Virtual environment not found!" >> "${policyLogFile}"
+ exit 250
+fi
+
+pushd /usr/local/src/sikker-ansatt/policies || exit 251
+ansible-playbook "${policyFile}.yaml" >> "${policyLogFile}"
+popd || return
+
+echo "Finished Intune policy: ${policyFile} at $(date -Iseconds)" >> "${policyLogFile}"
