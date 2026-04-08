@@ -12,7 +12,7 @@ apply_policy = true
 enable_hello = true
 
 # Sudoers
-sudo_groups = {{ sudo_groups | default() }}
+sudo_groups = {{ local_admin_groups | default() }}
 
 # Reqired for debian based systems
 local_groups = users
