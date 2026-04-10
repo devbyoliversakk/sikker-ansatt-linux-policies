@@ -1,3 +1,4 @@
+---
 - name: Update apt cache
   ansible.builtin.apt:
     update_cache: true
@@ -43,3 +44,12 @@
     - himmelblau-qr-greeter
     - himmelblau-sso
     - o365
+
+- name: Ensure himmelblau service is enabled and started
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - himmelblaud
+    - himmelblaud-tasks
