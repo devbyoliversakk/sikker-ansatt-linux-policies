@@ -1,4 +1,7 @@
 ---
+# Sikker ansatt versjon kode
+sikker-ansatt-version: v0.0.2
+
 mde_onboarding_url: https://sslinux.blob.core.windows.net/salinux/cupheads-onboarding.py
 
 # The tenant domain should be set to the domain part of the UPN of the users in the tenant
