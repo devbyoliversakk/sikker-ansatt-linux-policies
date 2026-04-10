@@ -44,6 +44,21 @@
     - himmelblau-qr-greeter
     - himmelblau-sso
     - o365
+- name: Ensure /etc/himmelblau exists
+  ansible.builtin.file:
+    path: /etc/himmelblau
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Create /etc/himmelblau/himmelblau.conf from template
+  ansible.builtin.template:
+    src: himmelblau.conf.j2
+    dest: /etc/himmelblau/himmelblau.conf
+    owner: root
+    group: root
+    mode: "0644"
 
 - name: Ensure himmelblau service is enabled and started
   ansible.builtin.service:
