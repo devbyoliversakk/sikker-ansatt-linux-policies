@@ -4,11 +4,13 @@
   vars_files:
     - settings.yaml
 
-  tasks:
-    - name: Include customer spesific variables
-      ansible.builtin.include_vars:
-        file: "{{ customer_settings_file }}"
+  pre_tasks:
+    - name: Loading environment variables
+      ansible.builtin.set_fact:
+        tenant_domain: '{{ lookup("ansible.builtin.env", "TENANT_DOMAIN") }}'
+        local_admin_groups: '{{ lookup("ansible.builtin.env", "LOCAL_ADMIN_GROUPS") == "true" }}'
 
+  tasks:
     - name: Install himmelblau agent
       ansible.builtin.import_tasks:
         file: tasks/install-himmelblau.yaml

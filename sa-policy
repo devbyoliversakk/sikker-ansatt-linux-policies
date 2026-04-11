@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 policyDir="/usr/local/src/sikker-ansatt/policies"
 policyFile="${1%.*}"
@@ -15,6 +15,11 @@ else
  exit 250
 fi
 
-ansible-playbook "${policyDir}/${policyFile}.yaml" >> "${policyLogFile}"
+# Load all customer variables and export them all for Ansible to read
+set -o allexport
+source "/usr/local/src/sikker-ansatt/customer-settings.env"
+set +o allexport
+
+exec ansible-playbook "${policyDir}/${policyFile}.yaml" "$@" >> "${policyLogFile}"
 
 echo "Finished Intune policy: ${policyFile} at $(date -Iseconds)" >> "${policyLogFile}"
