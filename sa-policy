@@ -20,6 +20,6 @@ set -o allexport
 source "/usr/local/src/sikker-ansatt/customer-settings.env"
 set +o allexport
 
-exec ansible-playbook "${policyDir}/${policyFile}.yaml" "$@" >> "${policyLogFile}"
+exec ansible-playbook "${policyDir}/${policyFile}.yaml" >> "${policyLogFile}"
 
 echo "Finished Intune policy: ${policyFile} at $(date -Iseconds)" >> "${policyLogFile}"
