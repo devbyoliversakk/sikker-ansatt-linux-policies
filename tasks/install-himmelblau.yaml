@@ -60,6 +60,13 @@
     group: root
     mode: "0644"
 
+# Deleting this file is dangerous, but nessessary to ensure enrolement works on first try.
+# Used to coricomvent a bug discovered durring testing
+- name: Delete /var/cache/himmelblaud/himmelblau.cache.db
+  ansible.builtin.file:
+    path: /var/cache/himmelblaud/himmelblau.cache.db
+    state: absent
+
 - name: Ensure himmelblau service is enabled and started
   ansible.builtin.service:
     name: "{{ item }}"
