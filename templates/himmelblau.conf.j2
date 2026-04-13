@@ -10,6 +10,7 @@ apply_policy = true
 # Hello PIN is the same as the local user password.
 # This password will be used for sudo and login
 enable_hello = true
+enable_experimental_passwordless_fido = true
 
 # Sudoers
 sudo_groups = {{ local_admin_groups | default() }}
