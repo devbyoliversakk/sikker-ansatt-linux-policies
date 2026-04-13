@@ -7,8 +7,7 @@
   pre_tasks:
     - name: Loading environment variables
       ansible.builtin.set_fact:
-        tenant_domain: '{{ lookup("ansible.builtin.env", "TENANT_DOMAIN") }}'
-        local_admin_groups: '{{ lookup("ansible.builtin.env", "LOCAL_ADMIN_GROUPS") == "true" }}'
+        mde_onboarding_url: '{{ lookup("ansible.builtin.env", "MDE_ONBOARDING_URL") }}'
 
   tasks:
     - name: Include customer spesific variables
@@ -29,7 +28,7 @@
 
     - name: Download Onboarding json
       ansible.builtin.get_url:
-        url: "{{ MDE_ONBOARDING_URL }}"
+        url: "{{ mde_onboarding_url }}"
         dest: /tmp/mde_install/mdatp_onboard.json
         mode: '0600'
 
