@@ -23,7 +23,7 @@
 
     - name: Download Onboarding json
       ansible.builtin.get_url:
-        url: "{{ mde_onboarding_url }}"
+        url: "{{ MDE_ONBOARDING_URL }}"
         dest: /tmp/mde_install/mdatp_onboard.json
         mode: '0600'
 

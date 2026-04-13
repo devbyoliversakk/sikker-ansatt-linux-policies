@@ -1,5 +1,5 @@
 [global]
-domain = {{ tenant_domain }}
+domain = {{ TENANT_DOMAIN }}
 hsm_type = tpm
 
 # Enable enroling to intune
@@ -13,7 +13,7 @@ enable_hello = true
 enable_experimental_passwordless_fido = true
 
 # Sudoers
-sudo_groups = {{ local_admin_groups | default() }}
+sudo_groups = {{ LOCAL_ADMIN_GROUPS | default() }}
 
 # Reqired for debian based systems
 local_groups = users
