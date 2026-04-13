@@ -66,6 +66,7 @@
   ansible.builtin.file:
     path: /var/cache/himmelblaud/himmelblau.cache.db
     state: absent
+  when: himmelblau_delete_cache_db | default(false) | bool
 
 - name: Ensure himmelblau service is enabled and started
   ansible.builtin.service:
