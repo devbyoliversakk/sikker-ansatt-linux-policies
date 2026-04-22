@@ -11,10 +11,10 @@ exec >> "${policyLogFile}" 2>&1
 echo "Running Intune policy: ${policyFile} at $(date -Iseconds)" >> "${policyLogFile}"
 
 if [ -f /usr/local/src/sikker-ansatt/venv/bin/activate ]; then
- . /usr/local/src/sikker-ansatt/venv/bin/activate
+    . /usr/local/src/sikker-ansatt/venv/bin/activate
 else
- echo "Virtual environment not found!" >> "${policyLogFile}"
- exit 250
+    echo "Virtual environment not found!" >> "${policyLogFile}"
+    exit 250
 fi
 
 # Load all customer variables and export them all for Ansible to read
