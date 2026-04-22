@@ -22,6 +22,11 @@ set -o allexport
 source "/usr/local/src/sikker-ansatt/customer-settings.env"
 set +o allexport
 
-exec ansible-playbook "${policyDir}/${policyFile}.yaml" "${@}" >> "${policyLogFile}"
+if [ -f /usr/local/src/sikker-ansatt/venv/bin/ansible-playbook ]; then
+    /usr/local/src/sikker-ansatt/venv/bin/ansible-playbook "${policyDir}/${policyFile}.yaml" "${@}" >> "${policyLogFile}"
+else
+    echo "Cant find ansible installation" >> "${policyLogFile}"
+    exit 251
+fi
 
 echo "Finished Intune policy: ${policyFile} at $(date -Iseconds)" >> "${policyLogFile}"
