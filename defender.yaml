@@ -10,10 +10,6 @@
         mde_onboarding_url: '{{ lookup("ansible.builtin.env", "MDE_ONBOARDING_URL") }}'
 
   tasks:
-    - name: Include customer spesific variables
-      ansible.builtin.include_vars:
-        file: "{{ customer_settings_file }}"
-
     - name: Create a directory if it does not exist
       ansible.builtin.file:
         path: /tmp/mde_install
