@@ -4,6 +4,11 @@
   vars_files:
     - settings.yaml
 
+  pre_tasks:
+    - name: Loading environment variables
+      ansible.builtin.set_fact:
+        tenant_domain: '{{ lookup("ansible.builtin.env", "TENANT_DOMAIN") }}'
+
   tasks:
     - name: Create Edge policy directories
       ansible.builtin.file:
