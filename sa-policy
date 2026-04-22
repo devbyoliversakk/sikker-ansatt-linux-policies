@@ -1,6 +1,8 @@
 #!/bin/bash
 
-policyDir="/usr/local/src/sikker-ansatt/policies"
+basePath="/usr/local/src/sikker-ansatt"
+venvPath="${basePath}/venv"
+policyDir="${basePath}/policies"
 policyFile="${1%.*}"
 policyLogFile="/var/log/sa-policy-${policyFile}.log"
 
@@ -10,8 +12,8 @@ exec >> "${policyLogFile}" 2>&1
 
 echo "Running Intune policy: ${policyFile} at $(date -Iseconds)" > "${policyLogFile}"
 
-if [ -f /usr/local/src/sikker-ansatt/venv/bin/activate ]; then
-    source /usr/local/src/sikker-ansatt/venv/bin/activate
+if [ -f "${venvPath}/bin/activate" ]; then
+    source "${venvPath}/bin/activate"
 else
     echo "Virtual environment not found!" >> "${policyLogFile}"
     exit 250
@@ -19,11 +21,11 @@ fi
 
 # Load all customer variables and export them all for Ansible to read
 set -o allexport
-source "/usr/local/src/sikker-ansatt/customer-settings.env"
+source "${basePath}/customer-settings.env"
 set +o allexport
 
-if [ -f /usr/local/src/sikker-ansatt/venv/bin/ansible-playbook ]; then
-    /usr/local/src/sikker-ansatt/venv/bin/ansible-playbook "${policyDir}/${policyFile}.yaml" "${@}" >> "${policyLogFile}"
+if [ -f "${venvPath}/bin/ansible-playbook" ]; then
+    "${venvPath}/bin/ansible-playbook" "${policyDir}/${policyFile}.yaml" "${@}" >> "${policyLogFile}"
 else
     echo "Cant find ansible installation" >> "${policyLogFile}"
     exit 251
