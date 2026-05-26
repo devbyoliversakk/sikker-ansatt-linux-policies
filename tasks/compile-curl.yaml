@@ -1,0 +1,79 @@
+---
+- name: Verify installed curl version
+  ansible.builtin.command:
+    cmd: curl --version
+  register: curl_version
+  failed_when: false
+  changed_when: false
+
+- name: Parse installed curl version
+  ansible.builtin.set_fact:
+    curl_installed_version: >-
+      {{
+        (curl_version.stdout | regex_search('^curl\\s+([0-9.]+)', '\\1'))
+        | default('0.0.0', true)
+      }}
+  changed_when: false
+
+- name: Skip compile when required version is already installed
+  ansible.builtin.meta: end_host
+  when:
+    - curl_version.rc == 0
+    - curl_installed_version is version(curl_version_required, '>=')
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Install dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - nghttp2
+    - libnghttp2-dev
+    - libssl-dev
+    - libpsl-dev
+    - build-essential
+    - wget
+
+- name: Download curl
+  ansible.builtin.get_url:
+    url: https://curl.se/download/curl-8.14.1.tar.xz
+    dest: /tmp/curl-8.14.1.tar.xz
+    mode: '0644'
+
+- name: Extract curl
+  ansible.builtin.unarchive:
+    src: /tmp/curl-8.14.1.tar.xz
+    dest: /tmp/
+    remote_src: true
+
+- name: Remove curl tarball
+  ansible.builtin.file:
+    path: /tmp/curl-8.14.1.tar.xz
+    state: absent
+
+- name: Configure curl
+  ansible.builtin.command:
+    cmd: ./configure --prefix=/usr/local --with-ssl --with-nghttp2 --enable-versioned-symbols
+    chdir: /tmp/curl-8.14.1
+
+- name: Build curl
+  ansible.builtin.command:
+    cmd: make
+    chdir: /tmp/curl-8.14.1
+
+- name: Install curl
+  ansible.builtin.command:
+    cmd: sudo make install
+    chdir: /tmp/curl-8.14.1
+
+- name: Update shared library cache
+  ansible.builtin.command:
+    cmd: sudo ldconfig
+
+- name: Clean up curl source
+  ansible.builtin.file:
+    path: /tmp/curl-8.14.1
+    state: absent
