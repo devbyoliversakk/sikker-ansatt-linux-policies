@@ -22,7 +22,6 @@ edge_managed_policies:
     value: "primary_account_strict"
   - key: RestrictSigninToPattern
     value: "*@{{ tenant_domain }}"
-
 edge_recommended_policies:
   - key: HubsSidebarEnabled
     value: false
@@ -38,4 +37,3 @@ unattended_upgrades_config:
   - 'APT::Periodic::Unattended-Upgrade "1"'
 unattended_upgrades_settings:
   - 'Unattended-Upgrade::Automatic-Reboot "false"'
-
