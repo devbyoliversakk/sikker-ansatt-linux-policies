@@ -2,7 +2,7 @@
 - name: Install and onboard Microsoft Defender for Endpoint
   hosts: localhost
   vars_files:
-    - settings.yaml
+    - default.yaml
 
   pre_tasks:
     - name: Construct MDE onboarding URLs

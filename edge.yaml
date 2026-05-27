@@ -2,7 +2,7 @@
 - name: Configure Microsoft Edge policies
   hosts: localhost
   vars_files:
-    - settings.yaml
+    - default.yaml
 
   pre_tasks:
     - name: Loading environment variables
