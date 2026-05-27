@@ -1,6 +1,7 @@
 ---
 # Basic settings
 customer_settings_file: "/usr/local/src/sikker-ansatt/customer-settings.env"
+file_header_slash_block: "// Managed by Sikker Ansatt - support@upheads.no"
 
 # Defender settings
 mde_installer_log: "/var/log/sa-mde-installer.log"
@@ -27,3 +28,13 @@ edge_recommended_policies:
 
 # Onedrive
 curl_version_required: "8.14.1"
+
+# Update ring
+unattended_upgrades_config:
+  - 'APT::Periodic::Update-Package-Lists "1"'
+  - 'APT::Periodic::Download-Upgradeable-Packages "0"'
+  - 'APT::Periodic::AutocleanInterval "0"'
+  - 'APT::Periodic::Unattended-Upgrade "1"'
+unattended_upgrades_settings:
+  - 'Unattended-Upgrade::Automatic-Reboot "false"'
+
