@@ -22,7 +22,7 @@
   ansible.builtin.deb822_repository:
     name: himmelblau
     types: deb
-    uris: "https://packages.himmelblau-idm.org/stable/latest/deb/ubuntu24.04/"
+    uris: "https://packages.himmelblau-idm.org/stable/latest/deb/ubuntu{{ ansible_facts['distribution_release'] }}/"
     suites: "./"
     signed_by: https://packages.himmelblau-idm.org/himmelblau.asc
     state: present
