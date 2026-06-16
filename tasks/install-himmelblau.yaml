@@ -44,6 +44,15 @@
     - himmelblau-qr-greeter
     - himmelblau-sso
     - o365
+
+- name: Ensure himmelblau service is stopped before configuration
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: stopped
+  loop:
+    - himmelblaud
+    - himmelblaud-tasks
+
 - name: Ensure /etc/himmelblau exists
   ansible.builtin.file:
     path: /etc/himmelblau
