@@ -1,17 +1,15 @@
 ---
 - name: Install and onboard Microsoft Defender for Endpoint
   hosts: localhost
-  vars_files:
-    - default.yaml
 
   pre_tasks:
-    - name: Construct MDE onboarding URLs
+    - name: Load policy variables
+      ansible.builtin.import_tasks:
+        file: tasks/load-vars.yaml
+
+    - name: Construct MDE onboarding URL
       ansible.builtin.set_fact:
-        mde_onboarding_url: >-
-          https://sikkeransatt.blob.core.windows.net/{{
-          lookup('ansible.builtin.env', 'SERVICE_ID')
-          }}/
-          mdatp_onboard.json
+        mde_onboarding_url: "https://sikkeransatt.blob.core.windows.net/{{ service_id }}/mdatp_onboard.json"
 
   tasks:
     - name: Create a directory if it does not exist

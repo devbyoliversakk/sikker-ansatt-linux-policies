@@ -1,0 +1,35 @@
+---
+- name: Test load-vars
+  hosts: localhost
+
+  pre_tasks:
+    - name: Load layered vars and environment overrides
+      ansible.builtin.import_tasks:
+        file: ../tasks/load-vars.yaml
+
+  tasks:
+    - name: Debug all variables
+      ansible.builtin.debug:
+        msg:
+          # Environment overrides
+          sikker_ansatt_version: "{{ sikker_ansatt_version | default('NOT SET') }}"
+          service_id: "{{ service_id | default('NOT SET') }}"
+          tenant_domain: "{{ tenant_domain | default('NOT SET') }}"
+          local_admin_groups: "{{ local_admin_groups | default('NOT SET') }}"
+          # Basic settings
+          customer_settings_file: "{{ customer_settings_file | default('NOT SET') }}"
+          file_header_slash_block: "{{ file_header_slash_block | default('NOT SET') }}"
+          # Defender
+          mde_installer_log: "{{ mde_installer_log | default('NOT SET') }}"
+          mde_installer_url: "{{ mde_installer_url | default('NOT SET') }}"
+          mde_onboarding_url: "{{ mde_onboarding_url | default('NOT SET') }}"
+          # Edge
+          edge_managed_policies: "{{ edge_managed_policies | default('NOT SET') }}"
+          edge_recommended_policies: "{{ edge_recommended_policies | default('NOT SET') }}"
+          # OneDrive
+          curl_version_required: "{{ curl_version_required | default('NOT SET') }}"
+          # Update ring
+          unattended_upgrades_config: "{{ unattended_upgrades_config | default('NOT SET') }}"
+          unattended_upgrades_settings: "{{ unattended_upgrades_settings | default('NOT SET') }}"
+          # Microsoft repositories
+          microsoft_repositories: "{{ microsoft_repositories | default('NOT SET') }}"

@@ -1,0 +1,13 @@
+---
+- name: Include default vars
+  ansible.builtin.include_vars: "vars/default.yaml"
+
+- name: Include codename-specific vars
+  ansible.builtin.include_vars: "vars/{{ ansible_distribution_release }}.yaml"
+
+- name: Loading environment variables
+  ansible.builtin.set_fact:
+    sikker_ansatt_version: '{{ lookup("ansible.builtin.env", "SIKKER_ANSATT_VERSION") }}'
+    service_id: '{{ lookup("ansible.builtin.env", "SERVICE_ID") }}'
+    tenant_domain: '{{ lookup("ansible.builtin.env", "TENANT_DOMAIN") }}'
+    local_admin_groups: '{{ lookup("ansible.builtin.env", "LOCAL_ADMIN_GROUPS") }}'

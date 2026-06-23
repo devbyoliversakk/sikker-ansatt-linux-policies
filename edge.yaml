@@ -1,13 +1,11 @@
 ---
 - name: Configure Microsoft Edge policies
   hosts: localhost
-  vars_files:
-    - default.yaml
 
   pre_tasks:
-    - name: Loading environment variables
-      ansible.builtin.set_fact:
-        tenant_domain: '{{ lookup("ansible.builtin.env", "TENANT_DOMAIN") }}'
+    - name: Load policy variables
+      ansible.builtin.import_tasks:
+        file: tasks/load-vars.yaml
 
   tasks:
     - name: Create Edge policy directories
