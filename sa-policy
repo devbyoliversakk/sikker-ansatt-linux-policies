@@ -26,6 +26,11 @@ set +o allexport
 
 if [ -f "${venvPath}/bin/ansible-playbook" ]; then
     "${venvPath}/bin/ansible-playbook" "${policyDir}/${policyFile}.yaml" "${@}" >> "${policyLogFile}"
+    rc=$?
+    if [ "${rc}" -ne 0 ]; then
+        echo "Policy failed with exit code ${rc}" >> "${policyLogFile}"
+        exit "${rc}"
+    fi
 else
     echo "Cant find ansible installation" >> "${policyLogFile}"
     exit 251
