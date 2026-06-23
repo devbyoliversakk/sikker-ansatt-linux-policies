@@ -1,0 +1,35 @@
+---
+- name: Remove legacy Microsoft repo list files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/apt/sources.list.d/microsoft-prod.list
+    - /etc/apt/sources.list.d/microsoft-edge.list
+    - /usr/share/keyrings/microsoft-prod.gpg
+
+- name: Ensure Microsoft repo settings exist for the current distribution
+  ansible.builtin.assert:
+    that:
+      - microsoft_repositories is defined
+      - microsoft_repositories | length > 0
+    fail_msg: >-
+      "No Microsoft repository settings are defined for {{ ansible_distribution_release }}"
+
+- name: Configure Microsoft repositories using deb822 sources
+  ansible.builtin.deb822_repository:
+    name: "{{ item.name }}"
+    types:
+      - deb
+    uris: "{{ item.uris }}"
+    suites: "{{ item.suites }}"
+    components: "{{ item.components }}"
+    architectures: "{{ item.architectures | default(omit) }}"
+    signed_by: "{{ item.signed_by }}"
+    state: present
+    enabled: true
+  loop: "{{ microsoft_repositories }}"
+
+- name: Update apt cache after configuring Microsoft repositories
+  ansible.builtin.apt:
+    update_cache: true

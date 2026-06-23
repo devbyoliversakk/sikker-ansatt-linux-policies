@@ -1,6 +1,6 @@
 ---
 microsoft_repositories:
-  - name: microsoft-prod
+  - name: microsoft
     uris: "https://packages.microsoft.com/ubuntu/{{ ansible_distribution_version }}/prod"
     suites: "{{ ansible_distribution_release }}"
     components:
