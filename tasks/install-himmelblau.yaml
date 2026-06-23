@@ -69,6 +69,16 @@
     group: root
     mode: "0644"
 
+- name: Ensure /etc/krb5.conf.d exists
+  ansible.builtin.file:
+    path: /etc/krb5.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  tags:
+    - patches
+
 # Deleting this file is dangerous, but nessessary to ensure enrolement works on first try.
 # Used to coricomvent a bug discovered durring testing
 - name: Delete /var/cache/himmelblaud/himmelblau.cache.db
