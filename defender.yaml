@@ -40,7 +40,6 @@
           /tmp/mde_install/mde_installer.sh
           --install
           --use-local-repo
-          --channel prod
           --onboard /tmp/mde_install/mdatp_onboard.json
           --rtp-mode
           --verbose
