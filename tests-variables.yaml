@@ -5,7 +5,7 @@
   pre_tasks:
     - name: Load layered vars and environment overrides
       ansible.builtin.import_tasks:
-        file: ../tasks/load-vars.yaml
+        file: tasks/load-vars.yaml
 
   tasks:
     - name: Debug all variables
@@ -33,3 +33,4 @@
           unattended_upgrades_settings: "{{ unattended_upgrades_settings | default('NOT SET') }}"
           # Microsoft repositories
           microsoft_repositories: "{{ microsoft_repositories | default('NOT SET') }}"
+          enrolement_method: "{{ enrolement_method | default('NOT SET') }}"
