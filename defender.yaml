@@ -34,15 +34,20 @@
         dest: /tmp/mde_install/mdatp_onboard.json
         mode: '0600'
 
+    - name: Install MDE
+      ansible.builtin.package:
+        name: mdatp
+        state: present
+
     - name: Install MDE on host
       ansible.builtin.script:
         cmd: >
           /tmp/mde_install/mde_installer.sh
-          --install
-          --use-local-repo
           --onboard /tmp/mde_install/mdatp_onboard.json
           --rtp-mode
+          --tag GROUP SikkerAnsattLinux
           --verbose
+          --debug
           --log-path {{ mde_installer_log }}
 
     - name: Cleanup MDE installation files
