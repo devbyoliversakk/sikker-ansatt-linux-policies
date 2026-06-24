@@ -8,6 +8,17 @@
         file: tasks/load-vars.yaml
 
   tasks:
-    - name: Install himmelblau agent
+    - name: Enrole with himmelblau
       ansible.builtin.import_tasks:
-        file: tasks/install-himmelblau.yaml
+        file: tasks/enrole-himmelblau.yaml
+      when: enrolement_method == "himmelblau"
+
+    - name: Enrole with Microsoft Intune
+      ansible.builtin.import_tasks:
+        file: tasks/enrole-intune.yaml
+      when: enrolement_method == "intune"
+
+    - name: Enrol using minimal method
+      ansible.builtin.import_tasks:
+        file: defender.yaml
+      when: enrolement_method == "minimal"

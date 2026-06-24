@@ -1,0 +1,26 @@
+---
+- name: Setup Microsoft repositories
+  ansible.builtin.import_tasks: setup-microsoft-repositories.yaml
+
+- name: Install dependencies
+  ansible.builtin.apt:
+    name:
+      - curl
+      - wget
+      - python3
+      - gpg
+      - gnupg
+      - git
+      - unzip
+      - libplist-utils
+      - apt-transport-https
+    state: present
+    update_cache: true
+
+- name: Install Microsoft Edge and Intune Portal
+  ansible.builtin.apt:
+    name:
+      - microsoft-edge-stable
+      - intune-portal
+    state: present
+    update_cache: true

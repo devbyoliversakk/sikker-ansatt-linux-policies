@@ -2,6 +2,7 @@
 # Basic settings
 customer_settings_file: "/usr/local/src/sikker-ansatt/customer-settings.env"
 file_header_slash_block: "// Managed by Sikker Ansatt - support@upheads.no"
+enrolement_method: "himmelblau"
 
 # Defender settings
 mde_installer_log: "/var/log/sa-mde-installer.log"
