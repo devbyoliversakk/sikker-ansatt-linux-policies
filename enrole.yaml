@@ -20,5 +20,5 @@
 
     - name: Enrol using minimal method
       ansible.builtin.import_tasks:
-        file: defender.yaml
+        file: tasks/install-defender.yaml
       when: enrolement_method == "minimal"
