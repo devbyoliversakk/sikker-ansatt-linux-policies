@@ -8,6 +8,10 @@
         file: tasks/load-vars.yaml
 
   tasks:
+    - name: Print enrolement method
+      ansible.builtin.debug:
+        msg: "Enrolement method: {{ enrolement_method }}"
+
     - name: Enrole with himmelblau
       ansible.builtin.include_tasks:
         file: tasks/enrole-himmelblau.yaml
