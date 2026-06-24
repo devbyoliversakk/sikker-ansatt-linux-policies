@@ -11,3 +11,4 @@
     service_id: '{{ lookup("ansible.builtin.env", "SERVICE_ID") }}'
     tenant_domain: '{{ lookup("ansible.builtin.env", "TENANT_DOMAIN") }}'
     local_admin_groups: '{{ lookup("ansible.builtin.env", "LOCAL_ADMIN_GROUPS") }}'
+    enrolement_method: '{{ lookup("ansible.builtin.env", "ENROLEMENT_METHOD") }}'
