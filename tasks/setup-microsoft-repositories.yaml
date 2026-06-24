@@ -14,7 +14,7 @@
       - microsoft_repositories is defined
       - microsoft_repositories | length > 0
     fail_msg: >-
-      "No Microsoft repository settings are defined for {{ ansible_distribution_release }}"
+      "No Microsoft repository settings are defined for {{ ansible_facts['distribution_release'] }}"
 
 - name: Configure Microsoft repositories using deb822 sources
   ansible.builtin.deb822_repository:

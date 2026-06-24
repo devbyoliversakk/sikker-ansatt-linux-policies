@@ -1,8 +1,8 @@
 ---
 microsoft_repositories:
   - name: microsoft
-    uris: "https://packages.microsoft.com/ubuntu/{{ ansible_distribution_version }}/prod"
-    suites: "{{ ansible_distribution_release }}"
+    uris: "https://packages.microsoft.com/ubuntu/{{ ansible_facts['distribution_version'] }}/prod"
+    suites: "{{ ansible_facts['distribution_release'] }}"
     components:
       - main
     architectures:

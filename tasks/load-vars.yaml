@@ -3,7 +3,7 @@
   ansible.builtin.include_vars: "vars/default.yaml"
 
 - name: Include codename-specific vars
-  ansible.builtin.include_vars: "vars/{{ ansible_distribution_release }}.yaml"
+  ansible.builtin.include_vars: "vars/{{ ansible_facts['distribution_release'] }}.yaml"
 
 - name: Loading environment variables
   ansible.builtin.set_fact:
