@@ -1,8 +1,8 @@
 ---
 microsoft_repositories:
   - name: microsoft-prod
-    uris: "https://packages.microsoft.com/ubuntu/{{ ansible_facts['distribution_version'] }}/prod"
-    suites: "{{ ansible_facts['distribution_version'] }}"
+    uris: "https://packages.microsoft.com/ubuntu/26.04/prod"
+    suites: "resolute"
     components:
       - main
     architectures:
@@ -15,4 +15,4 @@ microsoft_repositories:
       - main
     architectures:
       - amd64
-    signed_by: "https://packages.microsoft.com/keys/microsoft-2025.asc"
+    signed_by: "https://packages.microsoft.com/keys/microsoft.asc"
