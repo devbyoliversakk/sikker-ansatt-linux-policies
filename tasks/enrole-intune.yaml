@@ -24,3 +24,10 @@
       - intune-portal
     state: present
     update_cache: true
+
+- name: Launch Intune Portal for enrollment
+  ansible.builtin.command:
+    cmd: gtk-launch intune-portal
+  become: true
+  become_user: "{{ lookup('ansible.builtin.pipe', 'logname') }}"
+  changed_when: true
