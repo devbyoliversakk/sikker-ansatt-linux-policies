@@ -9,16 +9,16 @@
 
   tasks:
     - name: Enrole with himmelblau
-      ansible.builtin.import_tasks:
+      ansible.builtin.include_tasks:
         file: tasks/enrole-himmelblau.yaml
       when: enrolement_method == "himmelblau"
 
     - name: Enrole with Microsoft Intune
-      ansible.builtin.import_tasks:
+      ansible.builtin.include_tasks:
         file: tasks/enrole-intune.yaml
       when: enrolement_method == "intune"
 
     - name: Enrol using minimal method
-      ansible.builtin.import_tasks:
+      ansible.builtin.include_tasks:
         file: tasks/install-defender.yaml
       when: enrolement_method == "minimal"
